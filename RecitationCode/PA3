@@ -1,0 +1,57 @@
+'''
+          PA3: Truth tables and equivalence
+          -_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
+
+For PA3 you will be provided with a function callf2(f,p,q) 
+which will cal f(p,q), and with a main to test your code. 
+You will implement two functions: eval_tt_f2(f) and
+equivalent(tt1,tt2). 
+
+The function eval_tt_f2(f) will, given a two argument Boolean 
+function f ( one of the functions you created in PA2.py), return 
+the truth table for f. Use your make_tt_ins(n) function from 
+PA2.py to create an arrayList with n inputs, then use callf2 
+to append the truth value for f to each row of that arrayList. 
+For example, eval_tt_f2(iff) will return:
+
+[[False, False, True], [False, True, False], [True, False, False], [True, True, True]]
+
+The function equivalent(tt1,tt2) will return True if tt1 and tt2 
+are equivalent and False otherwise. For example, 
+  equivalent(eval_tt_f2(PA2.implies), eval_tt_f2(PA2.nqIMPnp))  
+will return True.
+
+You will need to add your code from PA2 by selecting PA2.py as the current file above.
+
+'''
+
+import sys
+import PA2
+import numpy
+from copy import copy
+
+# provided
+def callf2(f, p, q):
+  return f(p,q)
+
+# implement this
+def eval_tt_f2(f):
+    truthT = PA2.make_tt_ins(2)
+    for i in truthT:
+        value = callf2(f, i[0], i[1])
+        i.append(value)
+    return truthT
+
+# implement this
+def equivalent(tt1,tt2):
+    return(tt1 == tt2)
+
+# implement this
+def is_tautology(tt):
+    for i in tt:
+        if(i[2] == False):
+            return False
+    return True
+
+   
+print(is_tautology(equivalent(eval_tt_f2(PA2.implies), eval_tt_f2(PA2.nqIMPnp))))

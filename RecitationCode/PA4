@@ -1,0 +1,33 @@
+import sys
+
+"""
+    n>=1, k<=n, p: position to fill, lo: first number to pick
+    print all possible subsets of k out of n
+    [000]
+    first recursive call targets[_000]
+    n choose k
+    high end limit: (n-k)+p+1 - range
+    p represents indexing 
+
+    test with, 5 choose 2, and 5 choose 3
+  """
+def comb(A,n,k,p,lo): 
+  if (p == k): 
+    print(A)
+    return 
+  for i in range(lo, (n-k)+p+1):
+    A[i]= p 
+    comb(A,n,k,p+1,lo+1)
+  return
+  
+
+if __name__ == "__main__":
+  d = len(sys.argv)>3
+  n = int(sys.argv[1])
+  k = int(sys.argv[2])
+  A = []
+  for i in range(k):
+      A.append(0)
+  if d: print("n:",n,"k:",k)  
+print(comb(A,n,k,0,0))
+
